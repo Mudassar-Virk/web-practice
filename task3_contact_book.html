@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Book</title>
+</head>
+<body>
+  <h2>Contact Book</h2>
+  <input id="name" placeholder="Name" />
+  <input id="phone" placeholder="Phone" />
+  <input id="email" placeholder="Email" />
+  <button onclick="addContact()">Add</button>
+  <button onclick="editContact()">Edit Phone/Email</button>
+  <button onclick="deleteContact()">Delete by Name</button>
+  <button onclick="searchContact()">Search by Name</button>
+  <button onclick="displayContacts()">Display All</button>
+  <pre id="out"></pre>
+
+  <script>
+    const contactBook = {
+      contacts: [],
+      add(name, phone, email) {
+        if (!name) return;
+        this.contacts.push({ name, phone, email });
+      },
+      deleteByName(name) {
+        this.contacts = this.contacts.filter(
+          (c) => c.name.toLowerCase() !== name.toLowerCase()
+        );
+      },
+      searchByName(name) {
+        return this.contacts.filter((c) =>
+          c.name.toLowerCase().includes(name.toLowerCase())
+        );
+      },
+      edit(name, phone, email) {
+        const c = this.contacts.find(
+          (x) => x.name.toLowerCase() === name.toLowerCase()
+        );
+        if (c) {
+          c.phone = phone || c.phone;
+          c.email = email || c.email;
+        }
+      },
+      allSorted() {
+        return [...this.contacts].sort((a, b) => a.name.localeCompare(b.name));
+      }
+    };
+
+    function getInput() {
+      return {
+        name: document.getElementById("name").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        email: document.getElementById("email").value.trim()
+      };
+    }
+
+    function show(data) {
+      document.getElementById("out").textContent = JSON.stringify(data, null, 2);
+    }
+
+    function addContact() {
+      const { name, phone, email } = getInput();
+      contactBook.add(name, phone, email);
+      show(contactBook.allSorted());
+    }
+
+    function deleteContact() {
+      const { name } = getInput();
+      contactBook.deleteByName(name);
+      show(contactBook.allSorted());
+    }
+
+    function searchContact() {
+      const { name } = getInput();
+      show(contactBook.searchByName(name));
+    }
+
+    function editContact() {
+      const { name, phone, email } = getInput();
+      contactBook.edit(name, phone, email);
+      show(contactBook.allSorted());
+    }
+
+    function displayContacts() {
+      show(contactBook.allSorted());
+    }
+  </script>
+</body>
+</html>

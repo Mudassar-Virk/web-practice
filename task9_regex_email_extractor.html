@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Regex Email Extractor</title>
+</head>
+<body>
+  <h2>Regex Email Extractor</h2>
+  <textarea id="inputText" rows="8" cols="70" placeholder="Paste text here"></textarea>
+  <br /><br />
+  <button onclick="extractEmails()">Extract Emails</button>
+  <button onclick="copyAll()">Copy All</button>
+  <p id="count"></p>
+  <ul id="list"></ul>
+
+  <script>
+    let extracted = [];
+
+    function extractEmails() {
+      const text = document.getElementById("inputText").value;
+      const emails = text.match(/[\w.-]+@[\w.-]+\.\w{2,}/g) || [];
+      extracted = [...new Set(emails)];
+
+      const list = document.getElementById("list");
+      list.innerHTML = "";
+
+      if (extracted.length === 0) {
+        document.getElementById("count").textContent = "No emails found";
+        return;
+      }
+
+      extracted.forEach((e) => {
+        const li = document.createElement("li");
+        li.textContent = e;
+        list.appendChild(li);
+      });
+
+      document.getElementById("count").textContent = "Emails found: " + extracted.length;
+    }
+
+    function copyAll() {
+      if (extracted.length === 0) return;
+      navigator.clipboard.writeText(extracted.join("\n"));
+    }
+  </script>
+</body>
+</html>

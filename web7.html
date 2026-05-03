@@ -1,0 +1,66 @@
+<!-- A full semantic page skeleton -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+</html>
+<body>
+  <header>            <!-- site-wide top: logo, nav -->
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li> Services</li>
+        <li> Lists</li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>               <!-- ONE per page, the primary content -->
+    <section>          <!-- thematic group, usually has a heading -->
+      <h2>Blog Posts</h2>
+
+      <article>        <!-- self-contained: could be shared standalone -->
+        <h3>My First Post</h3>
+        <p>Content here...</p>
+      </article>
+
+    </section>
+
+    <aside>             <!-- related but secondary: sidebar, ads, tips -->
+      <h3>Related Links</h3>
+    </aside>
+  
+
+<!-- details + summary: accordion without JS -->
+<details>
+  <summary>What is HTML?</summary>
+  <p>HyperText Markup Language is the structure of web pages.</p>
+</details>
+
+<!-- picture: serve different images for different screens -->
+<picture>
+  <source srcset="photo-small.jpg" media="(max-width: 600px)">
+  <source srcset="photo-large.webp" type="image/webp">
+  <img src="photo-large.jpg" alt="A landscape photo">
+</picture>
+
+<!-- figure + figcaption: image with proper caption -->
+<figure>
+  <img src="chart.png" alt="Sales chart">
+  <figcaption>Figure 1: Q3 Sales by Region</figcaption>
+</figure>
+
+<!-- dialog: native modal (no JS needed to define structure) -->
+<dialog id="myModal">
+  <h2>Are you sure?</h2>
+  <button onclick="myModal.close()">Close</button>
+</dialog>
+<button onclick="myModal.showModal()">Open Modal</button>
+</main>
+  <footer>             <!-- copyright, links, contact -->
+    <p>© 2024 My Site</p>
+  </footer>
+</body>

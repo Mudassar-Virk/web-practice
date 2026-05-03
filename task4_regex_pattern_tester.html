@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regex Pattern Tester</title>
+</head>
+<body>
+  <h2>Regex Pattern Tester</h2>
+  <input id="pattern" placeholder="Regex pattern (without / /)" />
+  <input id="flags" placeholder="Flags (e.g. g,i)" value="g" />
+  <br /><br />
+  <textarea id="text" rows="6" cols="60" placeholder="Test string"></textarea>
+  <br /><br />
+  <button onclick="setPreset('^[\\w.-]+@[\\w.-]+\\.\\w{2,}$')">Email</button>
+  <button onclick="setPreset('^[6-9]\\d{9}$')">Phone</button>
+  <button onclick="setPreset('https?:\\/\\/.+')">URL</button>
+  <button onclick="setPreset('^\\d{4}-\\d{2}-\\d{2}$')">Date</button>
+  <button onclick="setPreset('^\\d{6}$')">PIN</button>
+  <button onclick="runTest()">Test</button>
+  <pre id="out"></pre>
+
+  <script>
+    function setPreset(p) {
+      document.getElementById("pattern").value = p;
+    }
+
+    function runTest() {
+      const p = document.getElementById("pattern").value;
+      const flags = document.getElementById("flags").value;
+      const text = document.getElementById("text").value;
+      const out = document.getElementById("out");
+
+      try {
+        const re = new RegExp(p, flags);
+        const matched = re.test(text);
+        const matchGlobal = new RegExp(p, flags.includes("g") ? flags : flags + "g");
+        const allMatches = text.match(matchGlobal);
+        const replaced = text.replace(re, "[REPLACED]");
+
+        out.textContent =
+          "test(): " + matched + "\n" +
+          "match(): " + JSON.stringify(allMatches) + "\n" +
+          "replace(): " + replaced;
+      } catch (e) {
+        out.textContent = "Invalid regex: " + e.message;
+      }
+    }
+  </script>
+</body>
+</html>

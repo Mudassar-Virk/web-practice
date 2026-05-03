@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f0f4f8;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    color: #1a1a2e;
+    margin-bottom: 1.5rem;
+  }
+  
+  .search-box {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .search-box input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  
+  .search-box input:focus {
+    border-color: #378add;
+  }
+  
+  .search-box button {
+    padding: 10px 18px;
+    background: #378add;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .search-box button:hover {
+    background: #185fa5;
+  }
+  
+  .error {
+    color: #e24b4a;
+    font-size: 14px;
+    margin-bottom: 1rem;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .weather-card {
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .weather-card h2 {
+    font-size: 1.6rem;
+    color: #1a1a2e;
+  }
+  
+  .weather-card #country {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 0.5rem;
+  }
+  
+  .weather-card img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .weather-card #temperature {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #1a1a2e;
+  }
+  
+  .weather-card #description {
+    font-size: 15px;
+    color: #555;
+    text-transform: capitalize;
+    margin-bottom: 1.5rem;
+  }
+  
+  .details {
+    display: flex;
+    justify-content: space-around;
+    background: #f8f9fb;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  
+  .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .label {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  
+  .detail span:last-child {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a1a2e;
+  }

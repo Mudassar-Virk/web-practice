@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 8 - Array Sorting Visualizer</title>
+</head>
+<body>
+  <h2>Array Sorting Visualizer</h2>
+  <button onclick="sortAsc()">Sort Ascending</button>
+  <button onclick="sortDesc()">Sort Descending</button>
+  <button onclick="shuffleArr()">Shuffle</button>
+  <button onclick="filterEven()">Filter Even</button>
+  <button onclick="filterGt50()">Filter > 50</button>
+  <button onclick="resetArr()">Reset</button>
+
+  <div id="bars" style="display:flex;align-items:flex-end;height:220px;border:1px solid #000;margin-top:10px;padding:5px;gap:4px;"></div>
+
+  <script>
+    let base = Array.from({ length: 20 }, () => Math.floor(Math.random() * 100) + 1);
+    let arr = [...base];
+
+    function draw() {
+      const bars = document.getElementById("bars");
+      bars.innerHTML = "";
+      arr.map((n) => {
+        const d = document.createElement("div");
+        d.style.width = "20px";
+        d.style.height = (n * 2) + "px";
+        d.style.background = "steelblue";
+        d.title = String(n);
+        bars.appendChild(d);
+      });
+    }
+
+    function sortAsc() { arr = [...arr].sort((a, b) => a - b); draw(); }
+    function sortDesc() { arr = [...arr].sort((a, b) => b - a); draw(); }
+    function shuffleArr() { arr = [...arr].sort(() => Math.random() - 0.5); draw(); }
+    function filterEven() { arr = arr.filter((n) => n % 2 === 0); draw(); }
+    function filterGt50() { arr = arr.filter((n) => n > 50); draw(); }
+    function resetArr() { arr = [...base]; draw(); }
+
+    draw();
+  </script>
+</body>
+</html>

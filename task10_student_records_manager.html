@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 10 - Student Records Manager</title>
+</head>
+<body>
+  <h2>Student Records Manager</h2>
+  <input id="name" placeholder="Name" />
+  <input id="roll" placeholder="Roll" />
+  <input id="m1" type="number" placeholder="Sub1" />
+  <input id="m2" type="number" placeholder="Sub2" />
+  <input id="m3" type="number" placeholder="Sub3" />
+  <input id="m4" type="number" placeholder="Sub4" />
+  <input id="m5" type="number" placeholder="Sub5" />
+  <button onclick="addStudent()">Add</button>
+  <button onclick="sortByPercentage()">Sort by %</button>
+  <button onclick="searchStudent()">Search Name/Roll</button>
+  <button onclick="deleteStudent()">Delete by Roll</button>
+  <p id="msg"></p>
+
+  <table border="1" cellpadding="6">
+    <thead>
+      <tr>
+        <th>Name</th><th>Roll</th><th>Total</th><th>Percentage</th><th>Grade</th>
+      </tr>
+    </thead>
+    <tbody id="body"></tbody>
+  </table>
+
+  <script>
+    let students = [];
+
+    function grade(p) {
+      if (p >= 90) return "A";
+      if (p >= 75) return "B";
+      if (p >= 60) return "C";
+      if (p >= 40) return "D";
+      return "F";
+    }
+
+    function getData() {
+      const name = document.getElementById("name").value.trim();
+      const roll = document.getElementById("roll").value.trim();
+      const marks = [
+        Number(document.getElementById("m1").value),
+        Number(document.getElementById("m2").value),
+        Number(document.getElementById("m3").value),
+        Number(document.getElementById("m4").value),
+        Number(document.getElementById("m5").value)
+      ];
+      return { name, roll, marks };
+    }
+
+    function addStudent() {
+      const { name, roll, marks } = getData();
+      if (!name || !roll || marks.some((m) => Number.isNaN(m))) return;
+      const total = marks.reduce((a, b) => a + b, 0);
+      const percentage = total / 5;
+      students.push({ name, roll, marks, total, percentage, grade: grade(percentage) });
+      render(students);
+    }
+
+    function sortByPercentage() {
+      students = [...students].sort((a, b) => b.percentage - a.percentage);
+      render(students);
+    }
+
+    function searchStudent() {
+      const key = document.getElementById("name").value.trim().toLowerCase() ||
+        document.getElementById("roll").value.trim().toLowerCase();
+      const result = students.filter(
+        (s) => s.name.toLowerCase().includes(key) || s.roll.toLowerCase().includes(key)
+      );
+      render(result);
+      document.getElementById("msg").textContent = "Search results: " + result.length;
+    }
+
+    function deleteStudent() {
+      const roll = document.getElementById("roll").value.trim().toLowerCase();
+      students = students.filter((s) => s.roll.toLowerCase() !== roll);
+      render(students);
+    }
+
+    function render(list) {
+      const body = document.getElementById("body");
+      body.innerHTML = "";
+      list.forEach((s) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML =
+          "<td>" + s.name + "</td><td>" + s.roll + "</td><td>" + s.total + "</td><td>" +
+          s.percentage.toFixed(2) + "%</td><td>" + s.grade + "</td>";
+        body.appendChild(tr);
+      });
+    }
+  </script>
+</body>
+</html>

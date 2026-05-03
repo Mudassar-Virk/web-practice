@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Grade Calculator</title>
+</head>
+<body>
+  <h2>Student Grade Calculator</h2>
+  <p id="avg"></p>
+  <p id="top"></p>
+  <table border="1" cellpadding="8" id="tablel">
+    <thead>
+      <tr><th>Name</th><th>Marks</th><th>Grade</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const students = [
+      { name: "Mudassar", marks: 92 },
+      { name: "Bina", marks: 77 },
+      { name: "Chetan", marks: 85 },
+      { name: "Divya", marks: 66 },
+      { name: "Esha", marks: 58 },
+      { name: "Farhan", marks: 81 },
+      { name: "Gita", marks: 74 },
+      { name: "Hari", marks: 49 },
+      { name: "Isha", marks: 88 },
+      { name: "Jatin", marks: 95 },
+      {name: "AMmar", marks: 25}
+    ];
+
+    function getGrade(n) {
+      if (n>= 90) return "A";
+      if (n >= 75) return "B";
+      if (n >= 60) return "C";
+      if (n >= 40) return "D";
+      return "F";
+    }
+
+    const withGrades = students.map((r) => ({ ...r, grade: getGrade(r.marks) }));
+    const toppers = withGrades.filter((r) => r.marks > 80);
+    const ranked = [...withGrades].sort((a, b) => b.marks - a.marks);
+    const average = withGrades.reduce((sum, r) => sum + r.marks, 0) / withGrades.length;
+
+    document.getElementById("avg").textContent = "Average Marks: " + average.toFixed(1);
+    document.getElementById("top").textContent = "Marks > 80: " + toppers.map((r) => r.name).join(", ");
+
+    const tbody = document.querySelector("#tablel tbody");
+    ranked.forEach((r) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = "<td>" + r.name + "</td><td>" + r.marks + "</td><td>" + r.grade + "</td>";
+      tbody.appendChild(tr);
+    });
+  </script>
+</body>
+</html>

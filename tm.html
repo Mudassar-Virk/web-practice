@@ -1,0 +1,76 @@
+<html>
+<head>
+    <title>Task m</title>
+</head>
+<body>
+
+    <h2>Task Manager</h2>
+
+    <input type="text" id="taskInput" placeholder="Enter task">
+    <button onclick="addTask()">Add Task</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        let tasks = [];
+
+        function addTask() {
+            let input = document.getElementById("taskInput");
+            let taskText = input.value;
+
+            if (taskText === "") return;
+
+            let task = {
+                id: Date.now(),
+                title: taskText
+            };
+
+            tasks.push(task);
+            input.value = "";
+            displayTasks();
+        }
+
+        function deleteTask(id) {
+            tasks = tasks.filter(task => task.id !== id);
+            displayTasks();
+        }
+
+        function updateTask(id) {
+            let newTitle = prompt("Update task:");
+            if (newTitle === null || newTitle === "") return;
+
+            tasks = tasks.map(task => {
+                if (task.id === id) {
+                    task.title = newTitle;
+                }
+                return task;
+            });
+
+            displayTasks();
+        }
+
+        function displayTasks() {
+            let list = document.getElementById("taskList");
+            list.innerHTML = "";
+
+            tasks.forEach(task => {
+                let li = document.createElement("li");
+                li.textContent = task.title + " ";
+
+                let updateBtn = document.createElement("button");
+                updateBtn.textContent = "Update";
+                updateBtn.onclick = function() { updateTask(task.id); };
+
+                let deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "Delete";
+                deleteBtn.onclick = function() { deleteTask(task.id); };
+
+                li.appendChild(updateBtn);
+                li.appendChild(deleteBtn);
+                list.appendChild(li);
+            });
+        }
+    </script>
+
+</body>
+</html>

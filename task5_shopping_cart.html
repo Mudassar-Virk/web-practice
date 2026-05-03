@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 5 - Shopping Cart</title>
+</head>
+<body>
+  <h2>Shopping Cart</h2>
+  <input id="item" placeholder="Item" />
+  <input id="price" type="number" placeholder="Price" />
+  <input id="qty" type="number" placeholder="Qty" />
+  <button onclick="addItem()">Add Item</button>
+  <button onclick="removeItem()">Remove by Item</button>
+  <button onclick="updateQty()">Update Qty</button>
+  <p id="total"></p>
+
+  <table border="1" cellpadding="8">
+    <thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Amount</th></tr></thead>
+    <tbody id="cartBody"></tbody>
+  </table>
+
+  <script>
+    let cart = [];
+
+    function addItem() {
+      const item = document.getElementById("item").value.trim();
+      const price = Number(document.getElementById("price").value);
+      const qty = Number(document.getElementById("qty").value);
+      if (!item || price <= 0 || qty <= 0) return;
+      const existing = cart.find((c) => c.item.toLowerCase() === item.toLowerCase());
+      if (existing) existing.qty += qty;
+      else cart.push({ item, price, qty });
+      render();
+    }
+
+    function removeItem() {
+      const item = document.getElementById("item").value.trim().toLowerCase();
+      cart = cart.filter((c) => c.item.toLowerCase() !== item);
+      render();
+    }
+
+    function updateQty() {
+      const item = document.getElementById("item").value.trim().toLowerCase();
+      const qty = Number(document.getElementById("qty").value);
+      const found = cart.find((c) => c.item.toLowerCase() === item);
+      if (found && qty > 0) found.qty = qty;
+      render();
+    }
+
+    function render() {
+      const tbody = document.getElementById("cartBody");
+      tbody.innerHTML = "";
+      cart.forEach((c) => {
+        const amount = c.price * c.qty;
+        const tr = document.createElement("tr");
+        tr.innerHTML = "<td>" + c.item + "</td><td>" + c.price + "</td><td>" + c.qty + "</td><td>" + amount.toFixed(2) + "</td>";
+        tbody.appendChild(tr);
+      });
+
+      const total = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+      const discount = total > 500 ? total * 0.1 : 0;
+      const finalTotal = total - discount;
+      document.getElementById("total").textContent =
+        "Total: " + total.toFixed(2) + " | Discount: " + discount.toFixed(2) + " | Final: " + finalTotal.toFixed(2);
+    }
+  </script>
+</body>
+</html>
