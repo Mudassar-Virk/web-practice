@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+<body>
+
+<form action="/submit" method="POST">
+
+    
+    <fieldset>
+        <legend>Personal Information</legend>
+
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required minlength="2">
+        <br><br>
+
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+
+        <label for="password">Password *</label>
+        <input type="password" id="password" name="password" minlength="8" required>
+        <br><br>
+
+        <label for="dob">Date of Birth *</label>
+        <input type="date" id="dob" name="dob" required>
+        <br><br>
+
+        <p>Gender *</p>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label>
+
+        <input type="radio" id="female" name="gender" value="female" required>
+        <label for="female">Female</label>
+
+        <br><br>
+
+        <label for="profile">Profile Picture *</label>
+        <input type="file" id="profile" name="profile" accept=".jpg,.png" required>
+        <br><br>
+
+        <label for="bio">Bio *</label>
+        <textarea id="bio" name="bio" rows="4" required></textarea>
+
+    </fieldset>
+
+    <br>
+
+    
+    <fieldset>
+        <legend>Address</legend>
+
+        <label for="city">City *</label>
+        <select id="city" name="city" required>
+            <option value="">-- Select City --</option>
+
+            <optgroup label="Punjab">
+                <option value="lahore">Lahore</option>
+                <option value="rawalpindi">Rawalpindi</option>
+            </optgroup>
+
+            <optgroup label="KPK">
+                <option value="peshawar">Peshawar</option>
+                <option value="mardan">Mardan</option>
+            </optgroup>
+
+            <optgroup label="Sindh">
+                <option value="karachi">Karachi</option>
+                <option value="hyderabad">Hyderabad</option>
+            </optgroup>
+        </select>
+
+    </fieldset>
+
+    <br>
+
+    
+    <input type="checkbox" id="terms" name="terms" required>
+    <label for="terms">I agree to Terms and Conditions *</label>
+
+    <br><br>
+
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+
+</form>
+
+</body>
+</html>
