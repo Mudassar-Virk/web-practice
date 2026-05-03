@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application</title>
+</head>
+<body>
+
+<form action="/submit" method="POST">
+
+    <fieldset>
+        <legend>Job Application</legend>
+
+        <label for="pos">Select Position *</label>
+        <select id="pos" name="position" required>
+            <option value="">Choose role</option>
+
+            <optgroup label="Technical">
+                <option value="developer">Developer</option>
+                <option value="frontend">Frontend Developer</option>
+            </optgroup>
+
+            <optgroup label="Management">
+                <option value="product">Product Manager</option>
+                <option value="assistant">Assistant</option>
+            </optgroup>
+        </select>
+
+        <br><br>
+
+        <label for="exp">Years of Experience *</label>
+        <input type="number" id="exp" name="experience" min="0" max="40" required>
+
+        <br><br>
+
+        <p>Select Skills *</p>
+
+        <input type="checkbox" id="html" name="skills" value="HTML">
+        <label for="html">HTML</label>
+
+        <input type="checkbox" id="css" name="skills" value="CSS">
+        <label for="css">CSS</label>
+
+        <input type="checkbox" id="js" name="skills" value="JS">
+        <label for="js">JavaScript</label>
+
+        <input type="checkbox" id="react" name="skills" value="React">
+        <label for="react">React</label>
+
+        <br><br>
+
+        
+        <label for="cover">Cover Letter *</label>
+        <textarea id="cover" name="cover_letter" rows="5" required></textarea>
+
+        <br><br>
+
+        
+        <label for="cv">Upload CV (PDF only) *</label>
+        <input type="file" id="cv" name="cv" accept=".pdf" required>
+
+    </fieldset>
+
+    <br>
+
+    <button type="submit">Apply</button>
+    <button type="reset">Reset</button>
+
+</form>
+
+
+<label for="txt" >Enter words here</label>
+<textarea id="txt" name="character counter" rows="7" cols="40" ></textarea>
+<p id="counter">0/200</p>
+
+<script>
+
+let textarea = document.getElementById("txt");
+    let counter = document.getElementById("counter");
+
+    textarea.addEventListener("input", function() {
+        let count = textarea.value.length;
+        counter.textContent = count + " / 200 characters";
+    });
+
+</script>
+</body>
+</html>
