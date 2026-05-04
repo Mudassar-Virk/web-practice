@@ -15,6 +15,7 @@ console.log(`Your deposit amount is  ${amount} and current balance is ${this.bal
 
 withdraw(amount){
 
+    
 this.balan-= amount;
 console.log(`now balance is ${this.balan}`)
 
@@ -31,3 +32,7 @@ let x= new BankAccount("Mudassar",1500);
 x.deposit(1000);
 x.getinfo();
 x.withdraw(500);
+x.getinfo();
+x.deposit(10000);
+x.withdraw(5000);
+x.getinfo();
